@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Clock, XCircle } from "lucide-react";
 import type { Skill } from "@/context/AppContext";
+import { SKILL_CATEGORIES } from "@/context/AppContext";
 
 const statusConfig = {
   verified: { icon: CheckCircle, label: "Verified", className: "bg-success/10 text-success border-success/20" },
@@ -12,14 +13,18 @@ const statusConfig = {
 export const SkillCard = ({ skill, children }: { skill: Skill; children?: React.ReactNode }) => {
   const status = statusConfig[skill.status];
   const StatusIcon = status.icon;
+  const category = SKILL_CATEGORIES.find((c) => c.value === skill.category);
 
   return (
-    <Card className="shadow-card hover:shadow-elevated transition-shadow duration-300 border-border/60">
+    <Card className="shadow-card hover:shadow-elevated transition-all duration-300 border-border/60 hover:-translate-y-0.5">
       <CardHeader className="pb-3">
-        <div className="flex items-start justify-between">
-          <div>
-            <CardTitle className="text-base font-semibold">{skill.title}</CardTitle>
-            <p className="text-xs text-muted-foreground mt-1">{skill.category}</p>
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex items-start gap-3">
+            <span className="text-2xl mt-0.5">{category?.emoji || "📌"}</span>
+            <div>
+              <CardTitle className="text-base font-semibold">{skill.title}</CardTitle>
+              <p className="text-xs text-muted-foreground mt-1">{skill.category}</p>
+            </div>
           </div>
           <Badge variant="outline" className={status.className}>
             <StatusIcon className="w-3 h-3 mr-1" />
