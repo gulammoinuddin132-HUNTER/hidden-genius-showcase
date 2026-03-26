@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Sparkles, GraduationCap, BookOpen, Briefcase } from "lucide-react";
+import { GraduationCap, BookOpen, Briefcase } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const roles: { value: Role; label: string; icon: typeof GraduationCap; desc: string }[] = [
   { value: "student", label: "Student", icon: GraduationCap, desc: "Showcase your skills" },
@@ -34,7 +35,7 @@ const Auth = () => {
       <Card className="w-full max-w-md shadow-elevated border-border/60">
         <CardHeader className="text-center space-y-2">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <Sparkles className="w-6 h-6 text-primary" />
+            <img src={logo} alt="Hidden Genius" className="w-10 h-10 object-contain" />
             <span className="text-xl font-bold">Hidden Genius</span>
           </div>
           <CardTitle className="text-2xl">{isLogin ? "Welcome back" : "Create account"}</CardTitle>
@@ -42,7 +43,6 @@ const Auth = () => {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Role selection */}
             <div className="space-y-2">
               <Label>I am a</Label>
               <div className="grid grid-cols-3 gap-2">
@@ -63,7 +63,6 @@ const Auth = () => {
                 ))}
               </div>
             </div>
-
             {!isLogin && (
               <div className="space-y-2">
                 <Label htmlFor="name">Full Name</Label>
@@ -78,9 +77,7 @@ const Auth = () => {
               <Label htmlFor="password">Password</Label>
               <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" required />
             </div>
-
             <Button type="submit" className="w-full" size="lg">{isLogin ? "Sign In" : "Create Account"}</Button>
-
             <p className="text-center text-sm text-muted-foreground">
               {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
               <button type="button" onClick={() => setIsLogin(!isLogin)} className="text-primary font-medium hover:underline">

@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useApp } from "@/context/AppContext";
 import {
   Sidebar,
@@ -15,8 +15,9 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { NavLink } from "@/components/NavLink";
-import { User, LayoutDashboard, Award, Search, CheckSquare, LogOut, Sparkles } from "lucide-react";
+import { User, LayoutDashboard, Award, Search, CheckSquare, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.png";
 
 const studentNav = [
   { title: "Dashboard", url: "/student", icon: LayoutDashboard },
@@ -39,7 +40,6 @@ function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const navigate = useNavigate();
-  const location = useLocation();
 
   const nav = user?.role === "student" ? studentNav : user?.role === "faculty" ? facultyNav : recruiterNav;
 
@@ -52,7 +52,7 @@ function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarContent className="flex flex-col h-full">
         <div className="p-4 flex items-center gap-2">
-          <Sparkles className="w-6 h-6 text-sidebar-primary shrink-0" />
+          <img src={logo} alt="Hidden Genius" className="w-8 h-8 object-contain shrink-0" />
           {!collapsed && <span className="text-lg font-bold text-sidebar-foreground">Hidden Genius</span>}
         </div>
 
